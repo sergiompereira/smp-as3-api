@@ -1,13 +1,13 @@
-﻿package srg.youtube
+﻿package com.smp.api.youtube
 {
 	
 	//info:
 	//http://code.google.com/intl/pt-PT/apis/youtube/flash_api_reference.html
 	
 	
-	import srg.display.loaders.LoadDisplayObject;
-	import srg.media.video.IVideoOutput;
-	import srg.media.video.VideoEvent;
+	import com.smp.common.display.loaders.LoadDisplayObject;
+	import com.smp.media.video.IVideoOutput;
+	import com.smp.media.video.VideoEvent;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;

@@ -1,13 +1,13 @@
-﻿package srg.youtube
+﻿package com.smp.api.youtube
 {
 	
 	//info:
 	//http://code.google.com/intl/pt-PT/apis/youtube/flash_api_reference.html
 	
 	
-	import srg.display.loaders.LoadDisplayObject;
-	import srg.media.video.IVideoOutput;
-	import srg.media.video.VideoEvent;
+	import com.smp.common.display.loaders.LoadDisplayObject;
+	import com.smp.media.video.IVideoOutput;
+	import com.smp.media.video.VideoEvent;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
@@ -19,6 +19,7 @@
 	
 	public class  YouTubeVideoInterface extends EventDispatcher implements IVideoOutput
 	{
+		protected var _debug:Boolean;
 		protected var _playerid:String;
 		
 		protected var _dispSwf:LoadDisplayObject
@@ -29,9 +30,9 @@
 		protected var _time:Number;
 		
 		
-		public function YouTubeVideoInterface() {
+		public function YouTubeVideoInterface(debug:Boolean = false) {
 			
-			
+			_debug = debug;
 			Security.allowDomain('s.ytimg.com');
 			Security.allowDomain('www.youtube.com');
 			Security.allowDomain('s.ytimg.com');
@@ -313,11 +314,11 @@
 		}
 		
 		/**
-		 * @value : from 0 to 100
+		 * @value : from 0 to 1 converted into 0 - 100
 		 */
 		public function set volume(value:Number):void {
 			if (_ready == true) {
-				_player.setVolume(value);
+				_player.setVolume(value*100);
 			}else {
 				handleNoPlayerRequest();
 			}
@@ -347,7 +348,9 @@
 		
 		
 		private function handleNoPlayerRequest():void {
-			throw new Error("YouTubeVideoInterface: YouTube Player not loaded yet. Wait for Event.COMPLETE.");
+			if(_debug){
+				throw new Error("YouTubeVideoInterface: YouTube Player not loaded yet. Wait for Event.COMPLETE.");
+			}
 		}
 		
 		
