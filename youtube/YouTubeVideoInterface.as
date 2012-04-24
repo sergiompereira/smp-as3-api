@@ -5,7 +5,7 @@
 	//http://code.google.com/intl/pt-PT/apis/youtube/flash_api_reference.html
 	
 	
-	import com.smp.common.display.loaders.LoadDisplayObject;
+	import com.smp.common.display.loaders.DisplayObjectLoader;
 	import com.smp.media.video.IVideoOutput;
 	import com.smp.media.video.VideoEvent;
 	
@@ -22,7 +22,7 @@
 		protected var _debug:Boolean;
 		protected var _playerid:String;
 		
-		protected var _dispSwf:LoadDisplayObject
+		protected var _dispSwf:DisplayObjectLoader
 		protected var _player:Object;
 		protected var _objId:String = "";
 		protected var _ready:Boolean = false;
@@ -38,7 +38,7 @@
 			Security.allowDomain('s.ytimg.com');
 			Security.allowDomain('i.ytimg.com');
 		
-			_dispSwf = new LoadDisplayObject("http://www.youtube.com/apiplayer?version=3", true, false);
+			_dispSwf = new DisplayObjectLoader("http://www.youtube.com/apiplayer?version=3", true, false);
 			_dispSwf.addEventListener(Event.INIT, onLoaderInit);
 
 			_dispSwf.addEventListener(Event.COMPLETE, onPlayerLoaded);
@@ -347,7 +347,7 @@
 		// END: IVideoOutput defined methods
 		
 		
-		private function handleNoPlayerRequest():void {
+		protected function handleNoPlayerRequest():void {
 			if(_debug){
 				throw new Error("YouTubeVideoInterface: YouTube Player not loaded yet. Wait for Event.COMPLETE.");
 			}
